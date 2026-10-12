@@ -17,21 +17,19 @@ All scripts are config-driven. Edit `.list` files in `config/` — no code chang
 
 ## Architecture
 
-┌─────────────────────────────────────────────────────┐
-│ systemd timers │
-│ watchdog.timer → watchdog.service │
-│ healthcheck.timer → healthcheck.service │
-│ rotate.timer → rotate.service │
-│ backup.timer → backup.service │
-└──────────────────┬──────────────────────────────────┘
-│
-┌───────────┼───────────┬──────────────┐
-▼ ▼ ▼ ▼
-watchdog.sh healthcheck rotate.sh backup.sh
-│ .sh │ │
-▼ ▼ ▼ ▼
-systemctl file age age-based rclone
-is-active vs max tiering sync → S3
+systemd timers (scheduler)
+├── watchdog.timer → watchdog.service → scripts/watchdog.sh
+├── healthcheck.timer → healthcheck.service → scripts/healthcheck.sh
+├── rotate.timer → rotate.service → scripts/rotate.sh
+└── backup.timer → backup.service → scripts/backup.sh
+
+Each service is `Type=oneshot`. It runs the script, logs the result, and exits. The timer decides when to run it again.
+
+**What each script does:**
+- `watchdog.sh` — checks `systemctl is-active` for services in `services.list`, restarts failed ones
+- `healthcheck.sh` — checks file age vs `max_age` for files in `healthcheck.list`
+- `rotate.sh` — moves old files to archive by age tiers in `rotate.list`
+- `backup.sh` — runs `rclone sync` for sources in `backup.list`
 
 ## Quick start
 
