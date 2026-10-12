@@ -1,0 +1,6 @@
+# Format: <path>|<live_days>|<archive_days>|<cold_days>
+# Lines starting with # are ignored.
+
+/data/raw/trades|30|90|365
+/data/raw/quotes|30|90|365
+/data/raw/news|30|180|730

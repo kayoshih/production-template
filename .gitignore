@@ -1,0 +1,26 @@
+# Data
+data/
+*.log
+*.log.*
+
+# Configs with secrets
+config/*.local.yaml
+config/secrets.yaml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Env
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+

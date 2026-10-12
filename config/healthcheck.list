@@ -1,0 +1,5 @@
+# Format: <path>|<max_age_hours>|<name>
+# One check per line. Lines starting with # are ignored.
+/data/raw/quotes/latest.csv|2|quotes_latest
+/data/raw/trades/YYYY-MM-DD.csv|24|trades_daily
+/data/raw/network/bgp_log.csv|6|bgp_log

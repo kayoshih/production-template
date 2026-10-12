@@ -1,0 +1,12 @@
+[Unit]
+Description=Watchdog — monitors and restarts systemd services
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/production-template
+Environment="WATCHDOG_LOG=/var/log/watchdog.log"
+Environment="WATCHDOG_CONFIG=/opt/production-template/config/services.list"
+ExecStart=/opt/production-template/scripts/watchdog.sh

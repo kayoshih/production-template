@@ -1,0 +1,11 @@
+[Unit]
+Description=Rotate — rotates data by age
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/production-template
+Environment="ROTATE_LOG=/var/log/rotate.log"
+Environment="ROTATE_CONFIG=/opt/production-template/config/rotate.list"
+ExecStart=/opt/production-template/scripts/rotate.sh

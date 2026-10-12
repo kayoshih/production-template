@@ -1,0 +1,10 @@
+[Unit]
+Description=Run watchdog every 5 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Unit=watchdog.service
+
+[Install]
+WantedBy=timers.target

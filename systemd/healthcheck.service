@@ -1,0 +1,12 @@
+[Unit]
+Description=Healthcheck — checks data freshness
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/production-template
+Environment="HEALTHCHECK_LOG=/var/log/healthcheck.log"
+Environment="HEALTHCHECK_CONFIG=/opt/production-template/config/healthcheck.list"
+ExecStart=/opt/production-template/scripts/healthcheck.sh

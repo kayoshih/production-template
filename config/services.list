@@ -1,0 +1,6 @@
+# Format: one systemd service name per line.
+# Lines starting with # are ignored.
+
+myapp-collector.service
+myapp-aggregator.service
+myapp-web.service

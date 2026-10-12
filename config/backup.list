@@ -1,0 +1,6 @@
+# Format: <source_path>|<rclone_destination>
+# Lines starting with # are ignored.
+
+/home/user/project/scripts|s3:my-backup/scripts
+/home/user/project/systemd|s3:my-backup/systemd
+/home/user/data/raw/algopack|s3:my-backup/data/algopack

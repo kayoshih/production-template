@@ -1,0 +1,12 @@
+[Unit]
+Description=Backup — sync code + data to S3
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/production-template
+Environment="BACKUP_LOG=/var/log/backup.log"
+Environment="BACKUP_CONFIG=/opt/production-template/config/backup.list"
+ExecStart=/opt/production-template/scripts/backup.sh

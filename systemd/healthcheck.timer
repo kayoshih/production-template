@@ -1,0 +1,10 @@
+[Unit]
+Description=Run healthcheck hourly
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=1h
+Unit=healthcheck.service
+
+[Install]
+WantedBy=timers.target
