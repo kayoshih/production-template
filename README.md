@@ -17,11 +17,11 @@ All scripts are config-driven. Edit `.list` files in `config/` — no code chang
 
 ## Architecture
 
-systemd timers (scheduler)
-├── watchdog.timer → watchdog.service → scripts/watchdog.sh
-├── healthcheck.timer → healthcheck.service → scripts/healthcheck.sh
-├── rotate.timer → rotate.service → scripts/rotate.sh
-└── backup.timer → backup.service → scripts/backup.sh
+**systemd timers (scheduler):**
+- `watchdog.timer` → `watchdog.service` → `scripts/watchdog.sh`
+- `healthcheck.timer` → `healthcheck.service` → `scripts/healthcheck.sh`
+- `rotate.timer` → `rotate.service` → `scripts/rotate.sh`
+- `backup.timer` → `backup.service` → `scripts/backup.sh`
 
 Each service is `Type=oneshot`. It runs the script, logs the result, and exits. The timer decides when to run it again.
 
