@@ -17,11 +17,11 @@
 
 ## Архитектура
 
-systemd-таймеры (планировщик)
-├── watchdog.timer → watchdog.service → scripts/watchdog.sh
-├── healthcheck.timer → healthcheck.service → scripts/healthcheck.sh
-├── rotate.timer → rotate.service → scripts/rotate.sh
-└── backup.timer → backup.service → scripts/backup.sh
+**systemd-таймеры (планировщик):**
+- `watchdog.timer` → `watchdog.service` → `scripts/watchdog.sh`
+- `healthcheck.timer` → `healthcheck.service` → `scripts/healthcheck.sh`
+- `rotate.timer` → `rotate.service` → `scripts/rotate.sh`
+- `backup.timer` → `backup.service` → `scripts/backup.sh`
 
 Каждый сервис — `Type=oneshot`. Запускает скрипт, пишет лог, завершается. Таймер решает, когда запустить снова.
 
