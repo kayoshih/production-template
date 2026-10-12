@@ -17,21 +17,19 @@
 
 ## Архитектура
 
-┌─────────────────────────────────────────────────────┐
-│ systemd timers │
-│ watchdog.timer → watchdog.service │
-│ healthcheck.timer → healthcheck.service │
-│ rotate.timer → rotate.service │
-│ backup.timer → backup.service │
-└──────────────────┬──────────────────────────────────┘
-│
-┌───────────┼───────────┬──────────────┐
-▼ ▼ ▼ ▼
-watchdog.sh healthcheck rotate.sh backup.sh
-│ .sh │ │
-▼ ▼ ▼ ▼
-systemctl file age age-based rclone
-is-active vs max tiering sync → S3
+systemd-таймеры (планировщик)
+├── watchdog.timer → watchdog.service → scripts/watchdog.sh
+├── healthcheck.timer → healthcheck.service → scripts/healthcheck.sh
+├── rotate.timer → rotate.service → scripts/rotate.sh
+└── backup.timer → backup.service → scripts/backup.sh
+
+Каждый сервис — `Type=oneshot`. Запускает скрипт, пишет лог, завершается. Таймер решает, когда запустить снова.
+
+**Что делает каждый скрипт:**
+- `watchdog.sh` — проверяет `systemctl is-active` для сервисов из `services.list`, перезапускает упавшие
+- `healthcheck.sh` — проверяет возраст файлов vs `max_age` из `healthcheck.list`
+- `rotate.sh` — перемещает старые файлы в архив по уровням из `rotate.list`
+- `backup.sh` — запускает `rclone sync` для источников из `backup.list`
 
 ## Быстрый старт
 
